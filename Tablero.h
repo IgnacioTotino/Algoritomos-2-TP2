@@ -12,11 +12,16 @@ class Tablero
         //Se implementa el tablero como una lista
         //tiene un puntero al primer casillero del tablero.
         Casillero *primerCasillero;
+
         //atributos para cantidad de filas y columnas
-        //dimension del tablero es de filas x columnas.
         //filas y columnas no pueden tomar valor 0.
         unsigned int filas;
         unsigned int columnas;
+
+        //niveles indica la altura que tendra nuestro tablero
+        unsigned int niveles;
+        
+        //la dimension del tablero sera D = filas*columnas*niveles;
 
     public:
 
@@ -27,13 +32,14 @@ class Tablero
     //---------- Getters y Setters ----------
     unsigned int obtenerCantidadFilas();
     unsigned int obtenerCantidadColumnas();
+    unsigned int obtenerCantidadNiveles();
     unsigned int obtenerDimension();
     Casillero *obtenerCasillero();
 
     //---------- Funcionalidad ----------
-    bool modificarCasillero(usngined int, unsigned int);
-    bool chequearPropiedadCasillero(unsigned int, unsigned int, unsigned int);
-    bool atacarCasillero(unsigned int, unsigned int);
+    bool modificarCasillero(usngined int, unsigned int, unsigned int);
+    bool chequearPropiedadCasillero(unsigned int, unsigned int, unsigned int, unsigned int);
+    bool atacarCasillero(unsigned int, unsigned int, unsigned int);
 };
 
 #endif
