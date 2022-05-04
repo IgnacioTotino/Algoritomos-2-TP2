@@ -6,6 +6,9 @@ public:
 	~Jugador();
 
 private:
+	std::string nombre;
+	unsigned int id;
+
 
 
 

@@ -2,11 +2,12 @@
 
 
 //---------- Constructores ----------
-Tablero::Tablero(unsigned int filas, unsigned int columnas){
+Tablero::Tablero(unsigned int filas, unsigned int columnas, unsigned int niveles){
     this->primerCasillero = new Casillero();
     Casillero *aux = NULL, *actual = NULL;
     this->filas = filas;
     this->columnas = columnas;
+    this->niveles = niveles;
     size_t dimensionMatriz = this->obtenerDimension();
     for(size_t i=0; i<dimensionMatriz; i++){
         while(actual->existeProximo()){
@@ -37,10 +38,15 @@ unsigned int Tablero::obtenerCantidadColumnas(){
     return this->columnas;
 }
 
+unsigned int Tablero::obtenerCantidadNiveles(){
+    return this->niveles;
+}
+
 unsigned int Tablero::obtenerDimension(){
     unsigned int filas = this->obtenerCantidadFilas();
     unsigned int columnas = this->obtenerCantidadColumnas();
-    return filas*columnas;
+    unsigned int niveles = this->obtenerCantidadNiveles();
+    return filas*columnas*niveles;
 }
 
 Casillero *Tablero::obtenerCasillero(unsigned int fila, unsigned int columna){
@@ -52,7 +58,9 @@ Casillero *Tablero::obtenerCasillero(unsigned int fila, unsigned int columna){
     Casillero *obtenido = this->primerCasillero;
     for(size_t i=0; i<fila-1; i++){
         for(size_t j=0; j<columna-1; j++){
-            obtenido = obtenido->obtenerProximo();
+            for(size_t k=0; k<niveles-1; k++){
+                obtenido = obtenido->obtenerProximo();
+            }
         }
     }
     return obtenido;
