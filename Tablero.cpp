@@ -49,7 +49,7 @@ unsigned int Tablero::obtenerDimension(){
     return filas*columnas*niveles;
 }
 
-Casillero *Tablero::obtenerCasillero(unsigned int fila, unsigned int columna){
+Casillero *Tablero::obtenerCasillero(unsigned int fila, unsigned int columna, unsigned int niveles){
     if(!this->primerCasillero){
         std::cout<<"El tablero se encuentra vacio."<<std::endl;
         return NULL;
