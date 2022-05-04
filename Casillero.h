@@ -26,21 +26,24 @@ public:
 
 	//---------- geters -----------
 	//devuelve el estado en el que se encuentra el casillero;
-	obtenerEstado();
-	obtenerPropiedad();
+	Estado obtenerEstado();
+	unsigned int obtenerPropiedad();
+	Casillero *obtenerProximo();
 
-	//---------- geters -----------
-	definirEstado(Estado);
-	definirPropiedad(unsigned int);
-	definirProximo(Casillero *);
+	//---------- Setters -----------
+	void definirEstado(Estado);
+	void definirPropiedad(unsigned int);
+	void definirProximo(Casillero *);
 
+	//---------- Funcionalidad -----------
+	bool existeProximo();
 private:
 	//cada casillero tiene un puntero al proximo casillero o NULL si es el ultimo
 	Casillero *proximoCasillero;
 	//estado indica en que estado se encuentra el casillero
 	Estado estado;
 	//propiedad indica a quien le pertenece el casillero
-	//coincide con el id del jugador
+	//coincide con el id del jugador o 0 si no le pertenece a nadie.
 	unsigned int propiedad;
 }; 
 

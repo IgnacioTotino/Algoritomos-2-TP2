@@ -1,48 +1,37 @@
 #include "Casillero.h"
 
+
+//---------- Constructores ----------
 Casillero::Casillero(){
-    this = new Casillero;
+    this->estado = VACIO;
+    this->propiedad = 0;
     this->proximoCasillero = NULL;
-    return this;
 }
 
 Casillero::Casillero(Estado estado){
-    this = new Casillero;
     this->proximoCasillero = NULL;
     this->estado = estado;
+    this->propiedad = 0;
 }
 
 Casillero::Casillero(unsigned int propiedad){
-    this = new Casillero;
     this->proximoCasillero = NULL;
     this->propiedad = propiedad;
+    this->estado = VACIO;
 }
 
 Casillero::Casillero(Estado estado, unsigned int propiedad){
-    this = new Casillero;
     this->proximoCasillero = NULL;
     this->estado = estado;
     this->propiedad = propiedad;
 }
 
+//---------- Destructores ----------
 Casillero::~Casillero(){
-    delete this->casillero;
+    delete this;
 }
 
-Estado Casillero::obtenerEstado(){
-    return this->estado;
-}
-Casillero::Casillero(Estado estado, unsigned int propiedad){
-    this = new Casillero;
-    this->proximoCasillero = NULL;
-    this->estado = estado;
-    this->propiedad = propiedad;
-}
-
-Casillero::~Casillero(){
-    delete this->casillero;
-}
-
+//---------- Getters ----------
 Estado Casillero::obtenerEstado(){
     return this->estado;
 }
@@ -51,35 +40,29 @@ unsigned int Casillero::obtenerPropiedad(){
     return this->propiedad;
 }
 
+Casillero *Casillero::obtenerProximo(){
+    return this->proximoCasillero;
+}
+
+
+//---------- Setters ----------
 void Casillero::definirEstado(Estado estado){
     this->estado=estado;
 }
 
-void Casillero::definirPropie(unsigned int propiedad){
-    this->propiedad=propiedad;
-}
-
-Casillero::~Casillero(){
-    delete this->casillero;
-}
-
-Estado Casillero::obtenerEstado(){
-    return this->estado;
-}
-
-unsigned int Casillero::obtenerPropiedad(){
-    return this->propiedad;
-}
-
-void Casillero::definirEstado(Estado estado){
-    this->estado=estado;
-}
-
-void Casillero::definirPropie(unsigned int propiedad){
+void Casillero::definirPropiedad(unsigned int propiedad){
     this->propiedad=propiedad;
 }
 
 void Casillero::definirProximo(Casillero *proximoCasillero){
     this->proximoCasillero = proximoCasillero;
+}
+
+//---------- Funcionalidad ----------
+bool Casillero::existeProximo(){
+    if(!this->proximoCasillero){
+        return true;
+    }
+    return false;
 }
 
