@@ -4,26 +4,31 @@
 //---------- Constructores ----------
 Casillero::Casillero(){
     this->estado = VACIO;
-    this->propiedad = 0;
+    this->propietario = NULL;
     this->proximoCasillero = NULL;
+    this->terreno = TIERRA;
+
 }
 
 Casillero::Casillero(Estado estado){
     this->proximoCasillero = NULL;
     this->estado = estado;
-    this->propiedad = 0;
+    this->propietario = NULL;
+    this->terreno = TIERRA;
 }
 
-Casillero::Casillero(unsigned int propiedad){
+Casillero::Casillero(Jugador *propietario){
     this->proximoCasillero = NULL;
-    this->propiedad = propiedad;
+    this->propietario = propietario;
     this->estado = VACIO;
+    this->terreno = TIERRA;
 }
 
-Casillero::Casillero(Estado estado, unsigned int propiedad){
+Casillero::Casillero(Estado estado, Jugador *propietario, TipoTerreno terreno){
     this->proximoCasillero = NULL;
     this->estado = estado;
-    this->propiedad = propiedad;
+    this->propietario = propietario;
+    this->terreno = terreno;
 }
 
 //---------- Destructores ----------
@@ -36,26 +41,33 @@ Estado Casillero::obtenerEstado(){
     return this->estado;
 }
 
-unsigned int Casillero::obtenerPropiedad(){
-    return this->propiedad;
+Jugador *Casillero::obtenerPropiedad(){
+    return this->propietario;
+}
+
+TipoTerreno Casillero::obtenerTerreno(){
+    return this->terreno;
 }
 
 Casillero *Casillero::obtenerProximo(){
     return this->proximoCasillero;
 }
 
-
 //---------- Setters ----------
 void Casillero::definirEstado(Estado estado){
     this->estado=estado;
 }
 
-void Casillero::definirPropiedad(unsigned int propiedad){
-    this->propiedad=propiedad;
+void Casillero::definirPropiedad(Jugador *propietario){
+    this->propietario = propietario;
 }
 
 void Casillero::definirProximo(Casillero *proximoCasillero){
     this->proximoCasillero = proximoCasillero;
+}
+
+void Casillero::definirTerreno(TipoTerreno terreno){
+    this->terreno = terreno;
 }
 
 //---------- Funcionalidad ----------

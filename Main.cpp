@@ -2,10 +2,13 @@
 //
 
 #include <iostream>
+#include "Tablero.h"
+
 
 int main()
 {
-    std::cout << "Hello World!!!\n";
+    std::cout<<"Creamos tablero"<<std::endl;
+    Tablero tablero(3,3,3);
 }
 
 // Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar

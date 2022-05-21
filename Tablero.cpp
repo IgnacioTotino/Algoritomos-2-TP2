@@ -3,19 +3,35 @@
 
 //---------- Constructores ----------
 Tablero::Tablero(unsigned int filas, unsigned int columnas, unsigned int niveles){
-    this->primerCasillero = new Casillero();
-    Casillero *aux = NULL, *actual = NULL;
+    //inicializamos los atributos de Tablero
     this->filas = filas;
     this->columnas = columnas;
     this->niveles = niveles;
+
+    //definimos variables auxiliares
+    Casillero *aux = NULL, *actual = NULL;
     size_t dimensionMatriz = this->obtenerDimension();
-    for(size_t i=0; i<dimensionMatriz; i++){
+    
+    //reservamos memoria para el primer casillero y inicializamos
+    //se define que el primer casillero siempre sera tierra
+    //el constructor de casillero se encarga de poner el prox a NULL
+    this->primerCasillero = new Casillero(VACIO, 0, rand()%2);
+
+ 
+    //construimos el resto de los casilleros para la lista y los inicializamos
+    for(size_t i=1; i<dimensionMatriz; i++){
         while(actual->existeProximo()){
             actual = actual->obtenerProximo();
         }
-        aux = new Casillero();
+        Estado nuevoEstado=AIRE;
+        if(i<= filas*columnas){
+            int random = rand()%2;
+            nuevoEstado=random;
+        }
+        aux = new Casillero(VACIO,0,TIERRA);
         actual->definirProximo(aux);
     }
+    return this;
 }
 
 //---------- Destructores ----------
@@ -49,19 +65,41 @@ unsigned int Tablero::obtenerDimension(){
     return filas*columnas*niveles;
 }
 
-Casillero *Tablero::obtenerCasillero(unsigned int fila, unsigned int columna){
+Casillero *Tablero::obtenerCasillero(Posicion posicion){
     if(!this->primerCasillero){
         std::cout<<"El tablero se encuentra vacio."<<std::endl;
         return NULL;
     }
 
     Casillero *obtenido = this->primerCasillero;
-    for(size_t i=0; i<fila-1; i++){
-        for(size_t j=0; j<columna-1; j++){
-            for(size_t k=0; k<niveles-1; k++){
+    for(size_t i=0; i<posicion.z; i++){
+        for(size_t j=0; posicion.y; j++){
+            for(size_t k=0; k<posicion.x; k++){
                 obtenido = obtenido->obtenerProximo();
             }
         }
     }
     return obtenido;
+}
+
+void Tablero::modificarCasillero(Posicion posicion, Estado estado){
+    Casillero *casillero = this->obtenerCasillero(posicion);
+    casillero->definirEstado(estado);
+}
+
+void Tablero::imprimirTablero(){
+    Posicion posicion;
+    for(size_t i=1;i<this->niveles,i++){
+        posicion.z=i;
+        std::cout<<"nivel:  "<<i<<std::endl;
+        for(size_t j=1;j<this->columnas; j++){
+            posicion.y=j;
+            std::cout<<std::endl;
+            for(size_t k=1, k<this->filas; k++){
+                posicion.x=k;
+                Estado estado;
+                estado = this->obtenerCasillero(posicion)->obtenerEstado();
+            }
+        }
+    }
 }
