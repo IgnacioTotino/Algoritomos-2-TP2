@@ -1,17 +1,42 @@
 #pragma once
+#include <string>
+
+enum CartaAJugar {
+	misil,
+	avion,
+	barco,
+	bombaNuclear,
+	eliminarMazoSiguienteJugador,
+	cartaAdefinir1
+};;
 
 class Carta
 {
-public:
-	Carta();
-	~Carta();
-
+	
 private:
+	CartaAJugar tipoDeCarta;
+	std::string descripcionCarta;
+
+public:
+	
+	Carta(CartaAJugar tipoDeCarta);
+	/*
+	PRE:  ....
+	POST: Asigna una carta a jugar.
+	*/
+
+	CartaAJugar getCarta();
+	/*
+	PRE:  ....
+	POST: Devuevle la carta a jugar
+	*/
+
+	std::string getDescripcionCarta();
+	/*
+	PRE:  ....
+	POST: Devuelve la descripccion de la carta
+	*/
 
 };
 
 
-
-Carta::~Carta()
-{
-};
