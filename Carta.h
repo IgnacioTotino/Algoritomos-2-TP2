@@ -1,4 +1,6 @@
 #pragma once
+
+
 #include <string>
 
 enum CartaAJugar {
@@ -8,7 +10,9 @@ enum CartaAJugar {
 	bombaNuclear,
 	eliminarMazoSiguienteJugador,
 	cartaAdefinir1
-};;
+};
+
+
 
 class Carta
 {

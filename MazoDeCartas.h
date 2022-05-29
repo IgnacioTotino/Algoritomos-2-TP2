@@ -1,3 +1,5 @@
+#pragma once
+
 #include"Carta.h";
 #include "Cola.h";
 #include<cstdlib>;
@@ -12,7 +14,7 @@ public:
 	MazoDeCartas(int cantidadCartasMisil, int cantidadCartasAvion, int cantidadCartasBarco, int cantidadCartasBombaNuclear, int cantidadCartasEliminarMazo, int cantidadCartasX);
 	/*
 	PRE:  ....
-	POST: Crea una instancia de Mazo con las cantidades de cartas indicadas en los parámetros.
+	POST: Crea una instancia de Mazo con las cantidades de cartas indicadas en los parï¿½metros.
 	*/
 
 	Cola<Carta*>* getMazoDeCartas();
@@ -32,7 +34,7 @@ public:
 	bool elMazoEstaVacio();
 	/*
 	PRE:  ....
-	POST: Devuelve 'true' si el Mazo está vacío. En caso contrario, devuelve 'false'.
+	POST: Devuelve 'true' si el Mazo estï¿½ vacï¿½o. En caso contrario, devuelve 'false'.
 	*/
 
 	CartaAJugar generarNumero();

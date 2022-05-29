@@ -1,7 +1,5 @@
 #pragma once
 
-#ifndef CASILLERO_
-#define CASILLERO_
 
 #include <iostream>
 #include "Jugador.h"
@@ -19,6 +17,12 @@ typedef enum{
 	TIERRA,
 	AIRE,
 }TipoTerreno;
+
+typedef enum{
+	SOLDADO,
+	AVION,
+	BARCO,
+}TipoDeEjercito;
 
 /* Dado que se pide implementar el tablero con una lista tenemos nuestros
 * casilleros que representan la estructura minima de la que se compone
@@ -66,6 +70,7 @@ public:
 
 	//---------- Funcionalidad -----------
 	bool existeProximo();
+	void eliminarSoldado();
 
 private:
 	//cada casillero tiene un puntero al proximo casillero o NULL si es el ultimo
@@ -81,5 +86,3 @@ private:
 	//si no le pertenece a nadie el casillero se encuentra en NULL
 	Jugador *propietario;
 }; 
-
-#endif

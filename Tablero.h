@@ -3,9 +3,8 @@
 #include <iostream>
 #include "Casillero.h"
 #include "Jugador.h"
+#include "Validaciones.h"
 
-#ifndef TABLERO_H_
-#define TABLERO_H_
 
 //definimos una estructura simple posicion para el manejo interno
 // de la lista como si fuera una matriz. En alto nivel no se tendria
@@ -22,15 +21,9 @@ class Tablero
         //Se implementa el tablero como una lista
         //tiene un puntero al primer casillero del tablero.
         Casillero *primerCasillero;
-<<<<<<< HEAD
         //atributos de dimensiones, dimension total = filas*columnas*niveles
         //los 3 toman valores mayores a 1
         //Las implementaciones consideran 0,0,0 como la fila,columna,nivel=1,1,1
-=======
-
-        //atributos para cantidad de filas y columnas
-        //filas y columnas no pueden tomar valor 0.
->>>>>>> dev
         unsigned int filas;
         unsigned int columnas;
         unsigned int niveles;
@@ -65,15 +58,5 @@ class Tablero
 
 
     //---------- Funcionalidad ----------
-<<<<<<< HEAD
-    void modificarCasillero(unsigned int, unsigned int, unsigned int, Estado);
-    bool atacarCasillero(Posicion posicion);
     void imprimirTablero();
-=======
-    bool modificarCasillero(usngined int, unsigned int, unsigned int);
-    bool chequearPropiedadCasillero(unsigned int, unsigned int, unsigned int, unsigned int);
-    bool atacarCasillero(unsigned int, unsigned int, unsigned int);
->>>>>>> dev
 };
-
-#endif

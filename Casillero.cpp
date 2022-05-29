@@ -6,6 +6,7 @@ Casillero::Casillero(){
     this->estado = VACIO;
     this->propietario = NULL;
     this->proximoCasillero = NULL;
+    this->ejercito = NINGUNO;
     this->terreno = TIERRA;
 
 }
@@ -13,12 +14,14 @@ Casillero::Casillero(){
 Casillero::Casillero(Estado estado){
     this->proximoCasillero = NULL;
     this->estado = estado;
+    this->ejercito = NULL;
     this->propietario = NULL;
     this->terreno = TIERRA;
 }
 
 Casillero::Casillero(Jugador *propietario){
     this->proximoCasillero = NULL;
+    this->ejercito = NINGUNO;
     this->propietario = propietario;
     this->estado = VACIO;
     this->terreno = TIERRA;
@@ -26,6 +29,7 @@ Casillero::Casillero(Jugador *propietario){
 
 Casillero::Casillero(Estado estado, Jugador *propietario, TipoTerreno terreno){
     this->proximoCasillero = NULL;
+    this->ejercito = NINGUNO;
     this->estado = estado;
     this->propietario = propietario;
     this->terreno = terreno;
@@ -53,6 +57,10 @@ Casillero *Casillero::obtenerProximo(){
     return this->proximoCasillero;
 }
 
+TipoDeEjercito Casillero::obtenerEjercito(){
+    return this->ejercito;
+}
+
 //---------- Setters ----------
 void Casillero::definirEstado(Estado estado){
     this->estado=estado;
@@ -70,6 +78,10 @@ void Casillero::definirTerreno(TipoTerreno terreno){
     this->terreno = terreno;
 }
 
+void Casillero::definirEjercito(TipoDeEjercito ejercito){
+    this->ejercito = ejercito;
+}
+
 //---------- Funcionalidad ----------
 bool Casillero::existeProximo(){
     if(!this->proximoCasillero){
@@ -78,3 +90,9 @@ bool Casillero::existeProximo(){
     return false;
 }
 
+void Casillero::eliminarEjercito(){
+    Jugador *jugadorAtacado = this->obtenerPropiedad();
+    jugadorAtacado->reducirEjercito();
+    this->definirEstado(INHABILITADO);
+    this->definirPropiedad(NULL);
+}
