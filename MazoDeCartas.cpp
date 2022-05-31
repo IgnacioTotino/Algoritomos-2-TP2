@@ -147,7 +147,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 		cout << "ocurrio un error" << endl;
 		break;
 	}
-
+	return tipoDeCarta;
 }
 
 MazoDeCartas::~MazoDeCartas() {

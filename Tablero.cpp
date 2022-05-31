@@ -1,6 +1,5 @@
 #include "Tablero.h"
 
-
 //---------- Constructores ----------
 Tablero::Tablero(unsigned int filas, unsigned int columnas, unsigned int niveles){
     if(!dimensionesValidas(filas,columnas,niveles)){

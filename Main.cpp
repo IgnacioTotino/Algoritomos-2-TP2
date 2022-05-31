@@ -7,44 +7,49 @@
 #include "Juego.h"
 #include "Jugador.h"
 
+class Tablero;
+class Jugador;
+
+using namespace std;
+
 int main()
 {
     Tablero *tablero;
-    vector<Jugador *> Jugadores;
+    vector<Jugador *> jugadores;
     
     size_t cantidadDeJugadores;
     size_t cantidadDeSoldados;
     unsigned int filas, columnas, niveles;
 
-    std::cout<<"---------!!! COMIENZA EL JUEGO !!!----------" <<std::endl<<std::endl;
+    cout<<"---------!!! COMIENZA EL JUEGO !!!----------" <<endl<<endl;
 
     //pedimos ingreso de la cantidad de jugadores N
-    std::cout<<"Ingrese la cantidad de jugadores que participaran:";
-    std::cin>>cantidadDeJugadores;
+    cout<<"Ingrese la cantidad de jugadores que participaran:";
+    cin>>cantidadDeJugadores;
     Clear();
 
     //pedimos el ingreso de la cantidad de soldados que cada jugador tendra M
-    std::cout<<"Ingrese la cantidad de soldados de los que dispondra cada jugador:";
-    std::cin>>cantidadDeSoldados;
+    cout<<"Ingrese la cantidad de soldados de los que dispondra cada jugador:";
+    cin>>cantidadDeSoldados;
     Clear();
 
     //pedimos el ingreso de las dimensiones del tablero
-    std::cout<<"Seleccione las dimensiones del tablero"<<std::endl;
-    std::cout<<"Cantidad de filas (x):";
-    std::cin>>filas;
-    std::cout<<"Cantidad de columnas (y):";
-    std::cin>>columnas;
-    std::cout<<"Cantidad de niveles:";
-    std::cin>>niveles;
+    cout<<"Seleccione las dimensiones del tablero"<<endl;
+    cout<<"Cantidad de filas (x):";
+    cin>>filas;
+    cout<<"Cantidad de columnas (y):";
+    cin>>columnas;
+    cout<<"Cantidad de niveles:";
+    cin>>niveles;
     Clear();
-    std::cout<<std::endl<<"OK! creando las estructuras correspondientes"<<std::endl<<std::endl;
+    cout<<endl<<"OK! creando las estructuras correspondientes"<<endl<<endl;
 
     //creamos y inicializamos los objetos correspondientes;
     tablero = new Tablero(filas,columnas,niveles);
     //usamos el tipo de dato vector para almacenar los punteros a los jugadores...
     //quiza es dificil de ver/entender pero tiene sentido sino se complica
     for(size_t i=0; i < cantidadDeJugadores; i++){
-        (jugadores+i) = new Jugador(i,cantidadDeSoldados);
+        jugadores.push_back(new Jugador(i,cantidadDeSoldados));
     }
     std::cout<<"Estructuras creadas! procedemos a jugar"<<std::endl;
 }

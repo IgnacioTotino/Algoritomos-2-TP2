@@ -1,8 +1,11 @@
 #pragma once
 
-#include"Carta.h";
-#include "Cola.h";
-#include<cstdlib>;
+#ifndef MCARTA_H_
+#define MCARTA_H_
+
+#include"Carta.h"
+#include "Cola.h"
+#include<cstdlib>
 
 class MazoDeCartas
 {
@@ -52,3 +55,4 @@ public:
 
 };
 
+#endif

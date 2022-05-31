@@ -1,5 +1,7 @@
 #pragma once
 
+#ifndef CARTA_H_
+#define CARTA_H_
 
 #include <string>
 
@@ -41,6 +43,7 @@ public:
 	POST: Devuelve la descripccion de la carta
 	*/
 
+	void ejecutarFuncion();
+
 };
-
-
+#endif

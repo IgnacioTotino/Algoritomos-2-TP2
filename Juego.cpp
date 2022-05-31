@@ -25,6 +25,10 @@ void atacarCasillero(Tablero* tablero, Jugador* jugador, Posicion posicion){
     }
 }
 
+bool Juego::chequearVictoria(size_t i){
+    return false;
+}
+
 bool Juego::jugar(Tablero *tablero, MazoDeCartas *mazo, Jugador *jugador){
     Carta *cartaObtenida;
     Posicion posicion;
@@ -63,3 +67,7 @@ bool Juego::jugar(Tablero *tablero, MazoDeCartas *mazo, Jugador *jugador){
     }
     return true;
 }
+bool moverSoldado(Tablero *tablero, Jugador *jugador, Posicion posicionOrigen, Posicion PosicionDestino){
+    return true;
+}
+

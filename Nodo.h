@@ -6,16 +6,15 @@ private:
 
     TipoNodo datoNodo;
     Nodo<TipoNodo>* siguiente;
-    const NULL = 0;
 
 public:
 
     Nodo(TipoNodo info, Nodo<TipoNodo>* next = NULL);
     //PRE: ...
-    //POST: El Nodo es creado con sus valores predeterminados o los pasados por parámetros
+    //POST: El Nodo es creado con sus valores predeterminados o los pasados por parï¿½metros
     
     TipoNodo dato();
-    //PRE: El Nodo tiene un tipo de dato válido.
+    //PRE: El Nodo tiene un tipo de dato vï¿½lido.
     //POST: El Nodo se mantiene igual, ya que se pasa una copia del dato.
 
     Nodo<TipoNodo>* proximo();

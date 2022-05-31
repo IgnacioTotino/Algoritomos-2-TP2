@@ -1,8 +1,12 @@
 #pragma once
 
+#ifndef CASILLERO_H_
+#define CASILLERO_H_
 
 #include <iostream>
 #include "Jugador.h"
+
+class Jugador;
 
 //definimos los posibles estados en los que puede encontrarse un casillero
 typedef enum{
@@ -22,6 +26,7 @@ typedef enum{
 	SOLDADO,
 	AVION,
 	BARCO,
+	NINGUNO,
 }TipoDeEjercito;
 
 /* Dado que se pide implementar el tablero con una lista tenemos nuestros
@@ -42,6 +47,8 @@ public:
 	//no tienen precondiciones se pueden usar siempre
 	//devuelve el estado en el que se encuentra el casillero;
 	Estado obtenerEstado();
+
+	TipoDeEjercito obtenerEjercito();
 
 	//devuelve el tipo de terreno del casillero;
 	TipoTerreno obtenerTerreno();
@@ -68,9 +75,11 @@ public:
 	//Pos: define el tipo de terreno del casillero
 	void definirTerreno(TipoTerreno);
 
+	void definirEjercito(TipoDeEjercito);
+
 	//---------- Funcionalidad -----------
 	bool existeProximo();
-	void eliminarSoldado();
+	void eliminarEjercito();
 
 private:
 	//cada casillero tiene un puntero al proximo casillero o NULL si es el ultimo
@@ -79,6 +88,8 @@ private:
 	//estado indica en que estado se encuentra el casillero
 	Estado estado;
 
+	TipoDeEjercito ejercito;
+
 	//terreno india el tipo de terreno al que corresponde el casillero
 	TipoTerreno terreno;
 
@@ -86,3 +97,19 @@ private:
 	//si no le pertenece a nadie el casillero se encuentra en NULL
 	Jugador *propietario;
 }; 
+
+void Clear()
+{
+#if defined _WIN32
+    system("cls");
+    //clrscr(); // including header file : conio.h
+#elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
+    system("clear");
+    //std::cout<< u8"\033[2J\033[1;1H"; //Using ANSI Escape Sequences 
+#elif defined (__APPLE__)
+    system("clear");
+#endif
+}
+
+
+#endif

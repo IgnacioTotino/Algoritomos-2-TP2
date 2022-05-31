@@ -1,19 +1,23 @@
 #pragma once
 
+#ifndef TABLERO_H_
+#define TABLERO_H_
+
 #include <iostream>
 #include "Casillero.h"
-#include "Jugador.h"
 #include "Validaciones.h"
 
+class Casillero;
 
 //definimos una estructura simple posicion para el manejo interno
 // de la lista como si fuera una matriz. En alto nivel no se tendria
 // que notar esta abtraccion.
-typedef struct{
-    size_t x;
-    size_t y;
-    size_t z;
-}Posicion;
+class Posicion{
+    public:
+        size_t x;
+        size_t y;
+        size_t z;
+};
 
 class Tablero
 {
@@ -26,7 +30,6 @@ class Tablero
         //Las implementaciones consideran 0,0,0 como la fila,columna,nivel=1,1,1
         unsigned int filas;
         unsigned int columnas;
-        unsigned int niveles;
 
         //niveles indica la altura que tendra nuestro tablero
         unsigned int niveles;
@@ -60,3 +63,5 @@ class Tablero
     //---------- Funcionalidad ----------
     void imprimirTablero();
 };
+
+#endif

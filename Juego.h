@@ -2,6 +2,12 @@
 
 #include "Tablero.h"
 #include "MazoDeCartas.h"
+
+class Tablero;
+class Jugador;
+class MazoDeCartas;
+class Posicion;
+
 class Juego
 {
 public:
@@ -12,11 +18,11 @@ public:
 	//recive un puntero al tablero en el cual se juega, un puntero al mazo
 	//de donde seran extraidas las cartas y un puntero al jugador
 	//que realiza la jugada.
-	bool jugar(Tablero *, MazoDeCartas Jugador *);
+	bool jugar(Tablero *, MazoDeCartas *, Jugador *);
 
 private:
 	size_t cantidadDeJugadores;
 };
 
 void atacarCasillero(Tablero *,Jugador *, Posicion);
-bool moverSoldado(Tablero*, Jugador *);
+bool moverSoldado(Tablero*, Jugador *, Posicion , Posicion);

@@ -14,7 +14,7 @@ Casillero::Casillero(){
 Casillero::Casillero(Estado estado){
     this->proximoCasillero = NULL;
     this->estado = estado;
-    this->ejercito = NULL;
+    this->ejercito = NINGUNO;
     this->propietario = NULL;
     this->terreno = TIERRA;
 }
@@ -92,7 +92,14 @@ bool Casillero::existeProximo(){
 
 void Casillero::eliminarEjercito(){
     Jugador *jugadorAtacado = this->obtenerPropiedad();
-    jugadorAtacado->reducirEjercito();
+    switch (this->obtenerEjercito()){
+        AVION:
+            jugadorAtacado->reducirAviones();
+        BARCO:
+            jugadorAtacado->reducirBarcos();
+        SOLDADO:
+            jugadorAtacado->reducirSoldados();
+    }
     this->definirEstado(INHABILITADO);
     this->definirPropiedad(NULL);
 }

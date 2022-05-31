@@ -1,0 +1,32 @@
+
+
+
+BatallaCampal: Main.o Tablero.o Casillero.o Juego.o Jugador.o Validaciones.o Carta.o MazoDeCartas.o
+	g++ Main.o Tablero.o Casillero.o Juego.o Jugador.o Validaciones.o Carta.o MazoDeCartas.o -o BatallaCampal
+
+Main.o: Main.cpp Tablero.h Juego.h Jugador.h 
+	g++ -c Main.cpp Tablero.cpp Juego.cpp Jugador.cpp
+
+Tablero.o: Tablero.cpp Casillero.h Jugador.h Validaciones.h
+	g++ -c Tablero.cpp Casillero.cpp Jugador.cpp Validaciones.cpp
+
+Casillero.o: Casillero.cpp Casillero.h Jugador.h Tablero.h
+	g++ -c Casillero.cpp Jugador.cpp Tablero.cpp
+
+Juego.o: Juego.cpp Juego.h Tablero.h MazoDeCartas.h
+	g++ -c Juego.cpp Tablero.cpp MazoDeCartas.cpp
+
+Jugador.o: Jugador.cpp Jugador.h Tablero.h
+	g++ -c Jugador.cpp Tablero.cpp
+
+Validaciones.o: Validaciones.cpp Validaciones.h Talbero.h
+	g++ -c Validaciones.cpp Tablero.cpp
+
+Carta.o: Carta.cpp Carta.h 
+	g++ -c Carta.cpp
+
+MazoDeCartas.o: MazoDeCartas.cpp MazoDeCartas.h Carta.h Cola.h
+	g++ -c MazoDeCartas.cpp Carta.cpp 
+
+clean:
+	rm *.o rm BatallaCampal

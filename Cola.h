@@ -1,6 +1,10 @@
+#ifndef NODO_H_
+#define NODO_H_
+
 #include "Nodo.h"
 #include<iostream>
 #include<string>
+
 
 template<class Tipo> class Cola {
 
@@ -16,13 +20,13 @@ public:
     Cola();
     /*
     PRE:  ....
-    POST: Se crea una instancia de COla vacía y lista para ser usada.        
+    POST: Se crea una instancia de COla vacï¿½a y lista para ser usada.        
     */
 
     bool estaVacia();
     /*
     PRE: ...
-    POST: Devuelve 'true' si la Cola no tiene ningún elemento. Caso contrario, devuelve 'false'.           
+    POST: Devuelve 'true' si la Cola no tiene ningï¿½n elemento. Caso contrario, devuelve 'false'.           
     */
 
     void acolar(Tipo elemento);
@@ -33,13 +37,13 @@ public:
 
     Tipo desacolar();
     /*
-    PRE: La Cola no está vacía.
+    PRE: La Cola no estï¿½ vacï¿½a.
     POST: Remueve el frente de la Cola y lo devuelve.
     */ 
 
     Tipo obtenerFrente();
     /*
-    PRE: La Cola no está vacía.
+    PRE: La Cola no estï¿½ vacï¿½a.
     POST: Devuelve el frente de la Cola.
     */
 
@@ -79,7 +83,7 @@ void Cola<Tipo>::acolar(Tipo elemento) {
 
     }
     else {
-        this->fondo->setProx(nuevoFondo);
+        this->fondo->setearProximo(nuevoFondo);
     }
 
     this->fondo = nuevoFondo;
@@ -89,13 +93,13 @@ template<class Tipo>
 Tipo Cola<Tipo>::desacolar() {
 
     if (this->estaVacia()) {
-        throw std::string("No se puede desacolar, la cola está vacía.");
+        throw std::string("No se puede desacolar, la cola estï¿½ vacï¿½a.");
     }
 
     // remueve el frente de la estructura 
     Nodo<Tipo>* frenteAnterior = this->frente;
 
-    this->frente = frenteAnterior->prox();
+    this->frente = frenteAnterior->proximo();
 
     if (this->frente == NULL) {
         this->fondo = NULL;
@@ -112,7 +116,7 @@ template<class Tipo>
 Tipo Cola<Tipo>::obtenerFrente() {
 
     if (this->estaVacia()) {
-        throw std::string("No se puede obtener el frente, la cola está vacía.");
+        throw std::string("No se puede obtener el frente, la cola estï¿½ vacï¿½a.");
     }
 
     Tipo elemento = this->frente->dato();
@@ -147,3 +151,5 @@ void Cola<Tipo>::imprimir() {
 
     std::cout << std::endl;
 }
+
+#endif

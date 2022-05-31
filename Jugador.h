@@ -1,8 +1,14 @@
 #pragma once
 
+#ifndef JUGADOR_H_
+#define JUGADOR_H_
+
 #include <iostream>
 #include <string>
 #include "Tablero.h"
+
+class Tablero;
+class Posicion;
 
 class Jugador 
 {
@@ -51,3 +57,5 @@ private:
 	size_t cantidadDeBarcos;
 	size_t cantidadDeAviones;
 };
+
+#endif

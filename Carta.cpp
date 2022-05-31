@@ -47,3 +47,7 @@ CartaAJugar Carta::getCarta() {
 std::string Carta::getDescripcionCarta() {
 	return this->descripcionCarta;
 }
+
+void Carta::ejecutarFuncion(){
+
+}
