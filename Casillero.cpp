@@ -84,7 +84,7 @@ void Casillero::definirEjercito(TipoDeEjercito ejercito){
 
 //---------- Funcionalidad ----------
 bool Casillero::existeProximo(){
-    if(!this->proximoCasillero){
+    if(this->proximoCasillero){
         return true;
     }
     return false;

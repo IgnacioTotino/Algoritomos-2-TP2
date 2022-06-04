@@ -18,6 +18,7 @@ Tablero::Tablero(unsigned int filas, unsigned int columnas, unsigned int niveles
     //se define que el primer casillero siempre sera tierra
     //el constructor de casillero se encarga de poner el prox a NULL
     this->primerCasillero = new Casillero(VACIO, 0, TipoTerreno(rand()%2));
+    actual = this->primerCasillero;
 
  
     //construimos el resto de los casilleros para la lista y los inicializamos
@@ -76,7 +77,7 @@ Casillero *Tablero::obtenerCasillero(Posicion posicion){
 
     Casillero *obtenido = this->primerCasillero;
     for(size_t i=0; i<posicion.z; i++){
-        for(size_t j=0; posicion.y; j++){
+        for(size_t j=0; j<posicion.y; j++){
             for(size_t k=0; k<posicion.x; k++){
                 obtenido = obtenido->obtenerProximo();
             }

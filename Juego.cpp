@@ -25,11 +25,46 @@ void atacarCasillero(Tablero* tablero, Jugador* jugador, Posicion posicion){
     }
 }
 
-bool Juego::chequearVictoria(size_t i){
-    return false;
+bool Juego::chequearVictoria(std::vector<Jugador *> jugadores){
+    bool jugadorVivo = false;
+    size_t cantidadDeSoldados;
+    size_t dimension = jugadores.size();//cantidad de elementos
+    for(size_t i=0; i<dimension; i++){
+        cantidadDeSoldados = jugadores[i]->obtenerCantidadDeSoldados();
+        if(cantidadDeSoldados > 0){ //el jugador todavia continua en juego
+            if(jugadorVivo != true){ //si esta en true entonces es el primer jugador
+                jugadorVivo = true; //por ser el primero seteamos la flag, hay 1 vivo
+            }
+            else{ //en este punto hay otro jugador con mas de un soldado en el tablero
+                return false; //devuelvo false y el juego continua
+            }
+        }
+    }
+    if(true != false){
+        throw("No queda ningun soldado en el tablero");
+    }
+    return true; //en este caso hay un unico jugador con soldados
 }
 
-bool Juego::jugar(Tablero *tablero, MazoDeCartas *mazo, Jugador *jugador){
+void Juego::colocarSoldados(Tablero *tablero, Jugador *jugador, size_t cantidadDeSoldados){
+    Posicion posicion;
+    Casillero *casillero;
+    for(size_t i=0; i<cantidadDeSoldados; i++){
+        std::cout<<"Soldado numero "<< i+1 << ":"<<std::endl;
+        posicion = jugador->pedirEntradaPosicion(tablero, "ingrese la posicion de su soldado:");
+        casillero = tablero->obtenerCasillero(posicion);
+        if(casillero->obtenerEstado() != OCUPADO){ //es el primer turno no va a haber inhabilitados
+            casillero->definirEstado(OCUPADO);
+            casillero->definirPropiedad(jugador);
+            casillero->definirEjercito(SOLDADO);
+        }else{
+            throw("Posicion ingresada invalida");
+            i--;
+        }
+    }       
+}
+
+bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, MazoDeCartas *mazo, Jugador *jugador){
     Carta *cartaObtenida;
     Posicion posicion;
     Posicion posicionOrigen;
@@ -50,10 +85,7 @@ bool Juego::jugar(Tablero *tablero, MazoDeCartas *mazo, Jugador *jugador){
     //fase de movimiento del jugador puede optar por mover o no
     std::cout<<"Ahora tiene la posibilidad de mover un soldado, desea hacerlo? (NO=0, SI=1)"<<std::endl;
     if(moverUnSoldado){
-        std::cout<<"Ingrese las posiciones del soldado que desea mover:";
-        posicionOrigen = jugador->pedirEntradaPosicion(tablero, "Ingrese la posicion 'x','y','z' del soldado que desea mover.");
-        posicionDestino = jugador->pedirEntradaPosicion(tablero, "Ingrese la posicion 'x','y','z' donde desea mover el soldado.");
-        moverSoldado(tablero, jugador, posicionOrigen, posicionDestino);
+        moverUnidad(tablero, jugador);
     }
     Clear();
 
@@ -62,12 +94,51 @@ bool Juego::jugar(Tablero *tablero, MazoDeCartas *mazo, Jugador *jugador){
     cartaObtenida->ejecutarFuncion();
     Clear();
 
-    if(this->chequearVictoria(this->cantidadDeJugadores)){
-        return false;
-    }
-    return true;
+    return this->chequearVictoria(jugadores);
 }
-bool moverSoldado(Tablero *tablero, Jugador *jugador, Posicion posicionOrigen, Posicion PosicionDestino){
-    return true;
+
+void moverUnidad(Tablero *tablero, Jugador *jugador){
+    std::cout << "Comienza movimiento de soldado"<<std::endl;
+    Posicion posicionOrigen, posicionDestino;
+    posicionOrigen = jugador->pedirEntradaPosicion(tablero, "Ingrese la posicion del soldado que desea mover:");
+    if(!posicionValida(tablero, posicionOrigen)){
+        throw ("Coordenada origen invalida(1)");
+    } 
+    std::cout<<std::endl;
+    posicionDestino = jugador->pedirEntradaPosicion(tablero, "ingrese la posicion de la casilla donde desea mover el soldado:");
+    if(!posicionValida(tablero, posicionDestino)){
+        throw("Coordenada destino invalida(1)");
+    }
+    //ahora las posiciones ingresadas minimanete se encuentran en el talbero
+    //agregamos las condiciones en las que no se podria mover el soldado
+    Casillero *casilleroOrigen = tablero->obtenerCasillero(posicionOrigen);
+    Casillero *casilleroDestion = tablero->obtenerCasillero(posicionDestino);
+    if( //comencemos por condiciones a cumplir del casillero origen
+        casilleroOrigen->obtenerEstado() == INHABILITADO || //no puede estar inhabilitado
+        casilleroOrigen->obtenerPropiedad() != jugador //no puede no ser del jugador
+    ){
+        throw ("coordenada origen invalida(2)");
+
+    }
+    if(
+        casilleroDestion->obtenerEstado() == INHABILITADO
+    ){
+        throw("coordenada destino invalida(2)");
+    }
+    if(movimientoValido(posicionOrigen, posicionDestino)){
+        if(casilleroDestion->obtenerEstado() == VACIO){
+            casilleroDestion->definirEjercito(casilleroOrigen->obtenerEjercito());
+            casilleroDestion->definirEstado(OCUPADO);
+            casilleroDestion->definirPropiedad(jugador);
+
+            casilleroOrigen->definirEjercito(NINGUNO);
+            casilleroOrigen->definirEstado(VACIO);
+            casilleroOrigen->definirPropiedad(NULL);
+        }
+        else{
+            atacarCasillero(tablero, jugador, posicionDestino);
+            atacarCasillero(tablero, casilleroDestion->obtenerPropiedad(), posicionOrigen);
+        }
+    }    
 }
 
