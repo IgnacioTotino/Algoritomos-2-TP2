@@ -40,9 +40,10 @@ bool Juego::chequearVictoria(std::vector<Jugador *> jugadores){
             }
         }
     }
-    if(true != false){
+    if(jugadorVivo == false){
         throw("No queda ningun soldado en el tablero");
     }
+    std::cout<<"SE TERMINO EL JUEGO!!!";
     return true; //en este caso hay un unico jugador con soldados
 }
 
@@ -64,7 +65,11 @@ void Juego::colocarSoldados(Tablero *tablero, Jugador *jugador, size_t cantidadD
     }       
 }
 
-bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, MazoDeCartas *mazo, Jugador *jugador){
+bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, /*MazoDeCartas *mazo,*/ Jugador *jugador){
+    if(jugador->obtenerCantidadDeSoldados() == 0){
+        std::cout<<"!!!!!el jugador "<< jugador->obtenerNombre()<<" ya perdio!!!!";
+        return false;
+    }
     Carta *cartaObtenida;
     Posicion posicion;
     Posicion posicionOrigen;
@@ -72,26 +77,27 @@ bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, MazoDeCarta
     bool moverUnSoldado;
 
     //comienza el turno retirando una carta
-    std::cout<< "jugador "<<jugador->obtenerNombre()<<"es su turno!"<<std::endl;
-    cartaObtenida = mazo->repartirCarta();
+    std::cout<< "jugador "<<jugador->obtenerNombre()<<"es su turno! (PARTE DE CARTA COMENTADA)"<<std::endl;
+    //cartaObtenida = mazo->repartirCarta();
     Clear();
 
     //fase de ataque del jugador
-    std::cout<<"Decida donde quiere atacar"<<std::endl;
+    std::cout<<jugador->obtenerNombre()<<" Decida donde quiere atacar"<<std::endl;
     posicion = jugador->pedirEntradaPosicion(tablero);
     atacarCasillero(tablero, jugador, posicion);
     Clear();
     
     //fase de movimiento del jugador puede optar por mover o no
     std::cout<<"Ahora tiene la posibilidad de mover un soldado, desea hacerlo? (NO=0, SI=1)"<<std::endl;
+    std::cin>>moverUnSoldado;
     if(moverUnSoldado){
         moverUnidad(tablero, jugador);
     }
     Clear();
 
     //fase de jugar la carta
-    std::cout <<"Momento de jugar su carta!"<<std::endl;
-    cartaObtenida->ejecutarFuncion();
+    std::cout <<"Momento de jugar su carta!(PARTE DE CARTA COMENTADA)"<<std::endl;
+    //cartaObtenida->ejecutarFuncion();
     Clear();
 
     return this->chequearVictoria(jugadores);

@@ -65,9 +65,9 @@ int main()
     std::cout<<"Estructuras creadas! procedemos a jugar"<<std::endl;
 
     size_t contadorDeTurnos=0;
-    MazoDeCartas *mazo = new MazoDeCartas(10,10,10,10,10,10);
+    //MazoDeCartas *mazo = new MazoDeCartas(2,2,2,2,2,2);
 
-    while(!juego->jugar(tablero,jugadores,mazo,jugadores[contadorDeTurnos])){
+    while(!juego->jugar(tablero,jugadores,/*mazo,*/jugadores[contadorDeTurnos])){
         contadorDeTurnos++;
         if(contadorDeTurnos == cantidadDeJugadores){
             contadorDeTurnos = 0;
