@@ -51,3 +51,4 @@ std::string Carta::getDescripcionCarta() {
 void Carta::ejecutarFuncion(){
 
 }
+

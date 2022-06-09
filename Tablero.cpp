@@ -88,18 +88,26 @@ Casillero *Tablero::obtenerCasillero(Posicion posicion){
 //---------- Funcionalidad ----------
 
 void Tablero::imprimirTablero(){
-    Posicion posicion;
-    for(size_t i=1; i<this->niveles; i++){
-        posicion.z=i;
-        std::cout<<"nivel:  "<<i<<std::endl;
-        for(size_t j=1;j<this->columnas; j++){
-            posicion.y=j;
-            std::cout<<std::endl;
-            for(size_t k=1; k<this->filas; k++){
-                posicion.x=k;
-                Estado estado;
-                estado = this->obtenerCasillero(posicion)->obtenerEstado();
+        image_drawer draw(image);
+    for(size_t k=0; k<niveles; k++){
+        for(size_t j=0; j<filas; j++){
+            for(size_t i=0; i<columnas; i++){
+                draw.plot_pen_pixel(1,10);
+                draw.rectangle(i*ancho/columnas ,j*alto/filas, i*ancho/columnas+ancho/columnas,j*alto/filas+alto/filas);
+                for(size_t h=j*alto/filas; h<j*alto/filas+alto/filas; h++){
+                    for(size_t w=i*ancho/columnas; w<i*ancho/columnas+ancho/columnas; w++){
+                        if(j%2==0 && i%2==0){
+                            draw.pen_color(0,100,0);
+                            draw.plot_pen_pixel(w,h);
+                        }else{
+                            draw.pen_color(0,0,100);
+                            draw.plot_pen_pixel(w,h);
+
+                        }
+                    }
+               }
             }
         }
     }
+
 }

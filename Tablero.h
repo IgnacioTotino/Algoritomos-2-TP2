@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Casillero.h"
 #include "Validaciones.h"
+#include "bitmap_image.hpp"
 
 class Casillero;
 
