@@ -27,9 +27,9 @@ bool movimientoValido(Posicion posicionOrigen, Posicion posicionDestino){
     //si las coordenadas son validas entonces tendran el mismo modulo en las
     //componentes que sean distintas de cero.
     Posicion distancia;
-    distancia.x = abs(posicionDestino.x - posicionOrigen.x);
-    distancia.y = abs(posicionDestino.y - posicionOrigen.y);
-    distancia.z = abs(posicionDestino.z - posicionOrigen.z);
+    distancia.x = abs((int)(posicionDestino.x - posicionOrigen.x));
+    distancia.y = abs((int)(posicionDestino.y - posicionOrigen.y));
+    distancia.z = abs((int)(posicionDestino.z - posicionOrigen.z));
     size_t aux[3] = {distancia.x, distancia.y, distancia.z};
     
     if(aux[0]==0){
