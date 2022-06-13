@@ -2,12 +2,12 @@
 #include<iostream>
 using namespace std;
 
-MazoDeCartas::MazoDeCartas(int cantidadCartasMisil, int cantidadCartasAvion, int cantidadCartasBarco, int cantidadCartasBombaNuclear, int cantidadCartasEliminarMazo, int cantidadCartasX) {
+MazoDeCartas::MazoDeCartas(int cantidadCartasMisil, int cantidadCartasAvion, int cantidadCartasBarco, int cantidadCartasBombaNuclear, int cantidadCartasEliminarMazo, int cantidadCartasRevivir) {
 
 	this->mazo = new Cola<Carta*>();
 
-	int cantidadTotalCartas = cantidadCartasMisil + cantidadCartasAvion + cantidadCartasBarco + cantidadCartasBombaNuclear + cantidadCartasEliminarMazo + cantidadCartasX;
-	int contadorMisil = 0, contadorAvion = 0, contadorBarco = 0, contadorNuclear = 0, contadorEM =0, contadorX = 0;
+	int cantidadTotalCartas = cantidadCartasMisil + cantidadCartasAvion + cantidadCartasBarco + cantidadCartasBombaNuclear + cantidadCartasEliminarMazo + cantidadCartasRevivir;
+	int contadorMisil = 0, contadorAvion = 0, contadorBarco = 0, contadorNuclear = 0, contadorEM =0, contadorR = 0;
 	int cantidadCartas = 0;
 
 	while (cantidadCartas < cantidadTotalCartas)
@@ -38,8 +38,11 @@ MazoDeCartas::MazoDeCartas(int cantidadCartasMisil, int cantidadCartasAvion, int
 				contadorEM++, cantidadCartas++;
 			}
 		}
-		else if (cartaAleatoria == cartaAdefinir1) {
-			//completar
+		else if (cartaAleatoria == revivirSoldado) {
+			if(contadorR < cantidadCartasRevivir){
+				this->acolarCarta(new Carta(cartaAleatoria));
+				contadorR++; cantidadCartas++;
+			}
 		}
 		else if (cartaAleatoria == bombaNuclear) {
 			if (contadorNuclear < cantidadCartasBombaNuclear) {
@@ -126,7 +129,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 	case 4:
 		if (porcentaje) {
 			cout << "Te toco la carta tipo ..." << endl;
-			tipoDeCarta = cartaAdefinir1;
+			tipoDeCarta = revivirSoldado;
 		}
 		else {
 			cout << "No te toco una carta este turno" << endl;

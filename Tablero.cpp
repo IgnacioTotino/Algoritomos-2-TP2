@@ -88,6 +88,49 @@ Casillero *Tablero::obtenerCasillero(Posicion posicion){
 
 //---------- Funcionalidad ----------
 
+//hacemos que cada casillero sea de 50x50
+
+void imprimirCasillero(bitmap_image &imagen, Casillero *casillero, int x0, int y0, int x, int y){
+    image_darw draw(imagen);
+    switch (casillero->obtenerTerreno()):
+        case TIERRA:
+        case AGUA:
+        case AIRE:
+}
+
+void Tablero::imprimirTablero(Tablero *tablero){
+    bitmap_image image("imagenTablero.bmp");
+    image_draw draw(image);
+
+    Posicion posicion;
+    Casillero *casilleroAux;
+
+    int niveles = tablero->obtenerCantidadNiveles();
+    int filas = tablero->obtenerCantidadFilas();
+    int columnas = tablero->obtenerCantidadColumnas();
+
+    int pasoColumna = 50;
+    int pasoFilas = 50;
+    int x0 = 0;
+    int y0 = 0;
+
+    for(int z=0; z<niveles; z++){
+        dibujarBloque(draw,casilleroAux,x0,y0,x,y);
+        for(int y=0; y<filas; y++){
+            for(int x=0; x<columnas; x++){
+                x0 += 5;
+                y0 += 5;
+                posicion.x = x;
+                posicion.y = y;
+                posicion.z = z;
+                casilleroAux = tablero->obtenerCasillero(posicion);
+                imprimirCasillero(draw,casilleroAux,x0,y0,x0+pasoColumna,y0+pasoFilas);
+            }
+        }
+    }
+
+}
+
 void Tablero::imprimirTablero(){
     Posicion posicion;
     for(size_t i=1; i<this->niveles; i++){

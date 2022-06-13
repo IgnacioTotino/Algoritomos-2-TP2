@@ -4,6 +4,7 @@
 #define TABLERO_H_
 
 #include <iostream>
+#include "bitmap_image.hpp"
 #include "Casillero.h"
 #include "Validaciones.h"
 
@@ -61,7 +62,7 @@ class Tablero
 
 
     //---------- Funcionalidad ----------
-    void imprimirTablero();
+    void imprimirTablero(Tablero *);
 };
 
 #endif

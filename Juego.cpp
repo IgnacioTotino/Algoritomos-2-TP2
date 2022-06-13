@@ -65,7 +65,7 @@ void Juego::colocarSoldados(Tablero *tablero, Jugador *jugador, size_t cantidadD
     }       
 }
 
-bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, /*MazoDeCartas *mazo,*/ Jugador *jugador){
+bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, MazoDeCartas *mazo, Jugador *jugador){
     if(jugador->obtenerCantidadDeSoldados() == 0){
         std::cout<<"!!!!!el jugador "<< jugador->obtenerNombre()<<" ya perdio!!!!";
         return false;
@@ -78,7 +78,7 @@ bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, /*MazoDeCar
 
     //comienza el turno retirando una carta
     std::cout<< "jugador "<<jugador->obtenerNombre()<<"es su turno! (PARTE DE CARTA COMENTADA)"<<std::endl;
-    //cartaObtenida = mazo->repartirCarta();
+    cartaObtenida = mazo->repartirCarta();
     Clear();
 
     //fase de ataque del jugador
@@ -97,7 +97,7 @@ bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, /*MazoDeCar
 
     //fase de jugar la carta
     std::cout <<"Momento de jugar su carta!(PARTE DE CARTA COMENTADA)"<<std::endl;
-    //cartaObtenida->ejecutarFuncion();
+    cartaObtenida->ejecutarFuncion(tablero, jugador);
     Clear();
 
     return this->chequearVictoria(jugadores);

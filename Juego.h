@@ -19,7 +19,7 @@ public:
 	//recive un puntero al tablero en el cual se juega, un puntero al mazo
 	//de donde seran extraidas las cartas y un puntero al jugador
 	//que realiza la jugada.
-	bool jugar(Tablero *, std::vector<Jugador *>, /*MazoDeCartas *,*/ Jugador *);
+	bool jugar(Tablero *, std::vector<Jugador *>, MazoDeCartas *, Jugador *);
 	void colocarSoldados(Tablero *, Jugador *, size_t);
 
 private:
