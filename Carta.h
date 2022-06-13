@@ -13,16 +13,14 @@ class Tablero;
 class Jugador;
 class Juego;
 
-enum CartaAJugar {
-	misil,
-	avion,
-	barco,
-	bombaNuclear,
-	eliminarMazoSiguienteJugador,
-	revivirSoldado
-};
-
-
+typedef enum{
+	MISIL,
+	CARTAAVION,
+	CARTABARCO,
+	BOMBANUCLEAR,
+	REVIVIRSOLDADO,
+	INUTILIDAD,
+}CartaAJugar;
 
 class Carta
 {
@@ -30,7 +28,7 @@ class Carta
 private:
 	CartaAJugar tipoDeCarta;
 	std::string descripcionCarta;
-	void (*funcionCarta)(Tablero *, Juego*, Jugador*);
+	void (*funcionCarta)(Tablero *, Jugador*);
 public:
 	
 	Carta(CartaAJugar tipoDeCarta);
@@ -51,9 +49,14 @@ public:
 	POST: Devuelve la descripccion de la carta
 	*/
 
-	void ejecutarFuncion(Tablero *, Juego *, Jugador *);
+	void ejecutarFuncion(Tablero *,  Jugador *);
 
 };
 
 void funcionAvion(Tablero *, Jugador *);
+void funcionBarco(Tablero *, Jugador *);
+void funcionMisil(Tablero *, Jugador *);
+void funcionBombaNuclear(Tablero *, Jugador *);
+void funcionRevivir(Tablero *, Jugador *);
+void funcionEliminarTurno(Tablero *, Jugador *);
 #endif

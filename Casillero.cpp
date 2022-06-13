@@ -99,6 +99,8 @@ void Casillero::eliminarEjercito(){
             jugadorAtacado->reducirAviones();
         case BARCO:
             jugadorAtacado->reducirBarcos();
+        case NINGUNO:
+            ;
     }
     this->definirEstado(INHABILITADO);
     this->definirPropiedad(NULL);

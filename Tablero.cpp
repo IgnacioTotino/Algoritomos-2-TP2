@@ -90,24 +90,92 @@ Casillero *Tablero::obtenerCasillero(Posicion posicion){
 
 //hacemos que cada casillero sea de 50x50
 
-void imprimirCasillero(bitmap_image &imagen, Casillero *casillero, int x0, int y0, int x, int y){
-    image_darw draw(imagen);
-    switch (casillero->obtenerTerreno()):
-        case TIERRA:
-        case AGUA:
-        case AIRE:
+void dibujarEjercito(bitmap_image &imagen, Casillero *casillero, int x0, int y0){
+    image_drawer draw(imagen);
+
+    switch(casillero->obtenerEjercito()){
+        case SOLDADO:
+            for(int r=0; r<10; r++){
+                draw.circle(x0+25,y0+10,r);
+            }
+            draw.pen_width(2);
+            draw.line_segment(x0+25,y0+10,x0+25,y0+20);
+            draw.line_segment(x0+25,y0+20,x0+15,y0+40);
+            draw.line_segment(x0+25,y0+20,x0+35,y0+40);
+        case AVION:
+            for(int x=30; x>0; x--){
+                draw.rectangle(x0+25-x,y0+10+x,x0+25+x,y0+10+x);
+            }
+        case BARCO:
+            for(int x=30; x>0; x--){
+                draw.rectangle(x0+25-x,y0+50+x,x0+25+x,y0+50+x);
+            } 
+        case NINGUNO:
+            break;
+    }
+
 }
 
-void Tablero::imprimirTablero(Tablero *tablero){
-    bitmap_image image("imagenTablero.bmp");
-    image_draw draw(image);
+void imprimirCasillero(bitmap_image &imagen, Casillero *casillero, int x0, int y0){
+    image_drawer draw(imagen);
+    switch (casillero->obtenerTerreno()){
+        case TIERRA:
+            if(casillero->obtenerEstado() == INHABILITADO){
+                draw.pen_color(255,0,0);
+            }else{
+                draw.pen_color(130,90,44);
+            }
+            for(int y=0; y<50; y++){
+                for(int x=0; x<50; x++){
+                    draw.rectangle(x0,y0,x0+50-x,y0+50-y);
+                }
+            }
+        case AGUA:
+            if(casillero->obtenerEstado() == INHABILITADO){
+                draw.pen_color(255,0,0);
+            }else{
+                draw.pen_color(5,100,0);
+                for(int y=0; y<50; y++){
+                    for(int x=0; x<50; x++){
+                        draw.rectangle(x0,y0,x0+50-x,y0+50-y);
+                    }
+                }
+                for(int r=0; r<40; r++){
+                    draw.circle(x0+25,y0+25,r);
+                }
+            }
+            for(int y=0; y<50; y++){
+                for(int x=0; x<50; x++){
+                    draw.rectangle(x0,y0,x0+50-x,y0+50-y);
+                }
+            }
+
+
+        case AIRE:
+            if(casillero->obtenerEstado() == INHABILITADO){
+                draw.pen_color(255,0,0);
+            }else{
+                draw.pen_color(238, 238, 238);
+            }
+            for(int y=0; y<50; y++){
+                for(int x=0; x<50; x++){
+                    draw.rectangle(x0,y0,x0+50-x,y0+50-y);
+                }
+            }
+    }
+}
+
+void Tablero::imprimirTablero(){
 
     Posicion posicion;
     Casillero *casilleroAux;
 
-    int niveles = tablero->obtenerCantidadNiveles();
-    int filas = tablero->obtenerCantidadFilas();
-    int columnas = tablero->obtenerCantidadColumnas();
+    int niveles = this->obtenerCantidadNiveles();
+    int filas = this->obtenerCantidadFilas();
+    int columnas = this->obtenerCantidadColumnas();
+
+    bitmap_image image(50*columnas,50*filas*niveles);
+    image_drawer draw(image);
 
     int pasoColumna = 50;
     int pasoFilas = 50;
@@ -115,35 +183,20 @@ void Tablero::imprimirTablero(Tablero *tablero){
     int y0 = 0;
 
     for(int z=0; z<niveles; z++){
-        dibujarBloque(draw,casilleroAux,x0,y0,x,y);
-        for(int y=0; y<filas; y++){
-            for(int x=0; x<columnas; x++){
-                x0 += 5;
-                y0 += 5;
+        x0=0;
+        for(int espacio=0; espacio<5; espacio++,y0++){
+            draw.horiztonal_line_segment(0,50,y0);
+        }
+        for(int y=0; y<filas; y++,y0+=pasoFilas){
+            for(int x=0; x<columnas; x++,x0+=pasoColumna){
                 posicion.x = x;
                 posicion.y = y;
                 posicion.z = z;
-                casilleroAux = tablero->obtenerCasillero(posicion);
-                imprimirCasillero(draw,casilleroAux,x0,y0,x0+pasoColumna,y0+pasoFilas);
+                casilleroAux = this->obtenerCasillero(posicion);
+                imprimirCasillero(image,casilleroAux,x0,y0);
             }
         }
     }
-
-}
-
-void Tablero::imprimirTablero(){
-    Posicion posicion;
-    for(size_t i=1; i<this->niveles; i++){
-        posicion.z=i;
-        std::cout<<"nivel:  "<<i<<std::endl;
-        for(size_t j=1;j<this->columnas; j++){
-            posicion.y=j;
-            std::cout<<std::endl;
-            for(size_t k=1; k<this->filas; k++){
-                posicion.x=k;
-                Estado estado;
-                estado = this->obtenerCasillero(posicion)->obtenerEstado();
-            }
-        }
-    }
+    image.save_image("imagenTablero.bmp");
+    std::cout<<"Se imprimio el Tablero, ver imagenTablero.bmp"<<std::endl;
 }

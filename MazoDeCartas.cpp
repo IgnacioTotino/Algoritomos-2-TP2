@@ -1,6 +1,7 @@
 #include "MazoDeCartas.h"
 #include<iostream>
 using namespace std;
+class Carta;
 
 MazoDeCartas::MazoDeCartas(int cantidadCartasMisil, int cantidadCartasAvion, int cantidadCartasBarco, int cantidadCartasBombaNuclear, int cantidadCartasEliminarMazo, int cantidadCartasRevivir) {
 
@@ -14,37 +15,37 @@ MazoDeCartas::MazoDeCartas(int cantidadCartasMisil, int cantidadCartasAvion, int
 	{
 		CartaAJugar cartaAleatoria = this->generarNumero();
 
-		if (cartaAleatoria == misil) {
+		if (cartaAleatoria == MISIL) {
 			if (contadorMisil < cantidadCartasMisil) {
 				this->acolarCarta(new Carta(cartaAleatoria));
 				contadorMisil++, cantidadCartas++;
 			}
 		}
-		else if (cartaAleatoria == avion) {
+		else if (cartaAleatoria == CARTAAVION) {
 			if (contadorAvion < cantidadCartasAvion) {
 				this->acolarCarta(new Carta(cartaAleatoria));
 				contadorAvion++, cantidadCartas++;
 			}
 		}
-		else if (cartaAleatoria == barco) {
+		else if (cartaAleatoria == CARTABARCO) {
 			if (contadorBarco < cantidadCartasBarco) {
 				this->acolarCarta(new Carta(cartaAleatoria));
 				contadorBarco++, cantidadCartas++;
 			}
 		}
-		else if (cartaAleatoria == eliminarMazoSiguienteJugador) {
+		else if (cartaAleatoria == INUTILIDAD) {
 			if (contadorEM < cantidadCartasEliminarMazo) {
 				this->acolarCarta(new Carta(cartaAleatoria));
 				contadorEM++, cantidadCartas++;
 			}
 		}
-		else if (cartaAleatoria == revivirSoldado) {
+		else if (cartaAleatoria == REVIVIRSOLDADO) {
 			if(contadorR < cantidadCartasRevivir){
 				this->acolarCarta(new Carta(cartaAleatoria));
 				contadorR++; cantidadCartas++;
 			}
 		}
-		else if (cartaAleatoria == bombaNuclear) {
+		else if (cartaAleatoria == BOMBANUCLEAR) {
 			if (contadorNuclear < cantidadCartasBombaNuclear) {
 				this->acolarCarta(new Carta(cartaAleatoria));
 				contadorNuclear++, cantidadCartas++;
@@ -89,7 +90,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 	case 0:
 		if (porcentaje) {
 			cout << "Te toco la carta tipo Misil" << endl;
-			tipoDeCarta = misil;
+			tipoDeCarta = MISIL;
 		}
 		else {
 			cout << "No te toco una carta este turno" << endl;
@@ -99,7 +100,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 	case 1:
 		if (porcentaje) {
 			cout << "Te toco la carta tipo Avion" << endl;
-			tipoDeCarta = avion;
+			tipoDeCarta = CARTAAVION;
 		}
 		else {
 			cout << "No te toco una carta este turno" << endl;
@@ -109,7 +110,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 	case 2:
 		if (porcentaje) {
 			cout << "Te toco la carta tipo Barco" << endl;
-			tipoDeCarta = barco;
+			tipoDeCarta = CARTABARCO;
 		}
 		else {
 			cout << "No te toco una carta este turno" << endl;
@@ -119,7 +120,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 	case 3:
 		if (porcentaje) {
 			cout << "Te toco la carta tipo Eliminar mazo del jugador contrario" << endl;
-			tipoDeCarta = eliminarMazoSiguienteJugador;
+			tipoDeCarta = INUTILIDAD;
 		}
 		else {
 			cout << "No te toco una carta este turno" << endl;
@@ -129,7 +130,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 	case 4:
 		if (porcentaje) {
 			cout << "Te toco la carta tipo ..." << endl;
-			tipoDeCarta = revivirSoldado;
+			tipoDeCarta = REVIVIRSOLDADO;
 		}
 		else {
 			cout << "No te toco una carta este turno" << endl;
@@ -139,7 +140,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 	case 5:
 		if(porcentaje < 98) {
 			cout << "Te toco la carta tipo Bomba Nuclear" << endl;
-			tipoDeCarta = bombaNuclear;
+			tipoDeCarta = BOMBANUCLEAR;
 		}
 		else {
 		cout << "No te toco una carta este turno" << endl;

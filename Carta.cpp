@@ -10,32 +10,32 @@ Carta::Carta(CartaAJugar cartaNueva) {
 
 	switch (this->getCarta())
 	{
-	case avion:
+	case CARTAAVION:
 		this->descripcionCarta = "Condicion {Necesita estar en el aire}\n Dispara 2 veces mas mientras este en el campo.";
 		this->funcionCarta = funcionAvion;
 		break;
 
-	case barco:
+	case CARTABARCO:
 		this->descripcionCarta = "Condicion {Necesita estar en el agua}\n Lanza un misil por cada turno";
 		this->funcionCarta = funcionBarco;
 		break;
 
-	case misil:
+	case MISIL:
 		this->descripcionCarta = "Al usarla destrulle 27 casilleros del campo.";
 		this->funcionCarta = funcionMisil;
 		break;
 
-	case bombaNuclear:
+	case BOMBANUCLEAR:
 		this->descripcionCarta = "Al jugar esta carta destruye todo el campo de juego.\n Ganas la partida.";
-		this->funcionCarta = funcionBombaAtomica;
+		this->funcionCarta = funcionBombaNuclear;
 		break;
 
-	case eliminarMazoSiguienteJugador:
+	case INUTILIDAD:
 		this->descripcionCarta = "Elimina el mazo del siguiente jugador";
 		this->funcionCarta = funcionEliminarTurno;
 		break;
 
-	case revivirSoldado:
+	case REVIVIRSOLDADO:
 		this->descripcionCarta = "Revive un soldado y puedes posicionarlo donde quieras";
 		this->funcionCarta = funcionAvion;
 		break;
@@ -54,10 +54,10 @@ std::string Carta::getDescripcionCarta() {
 	return this->descripcionCarta;
 }
 
-void Carta::ejecutarFuncion(Tablero *tablero, Juego *juego, Jugador *jugador){
-	this->funcionCarta(tablero,juego,jugador);
+void Carta::ejecutarFuncion(Tablero *tablero, Jugador *jugador){
+	this->funcionCarta(tablero,jugador);
 }
-void funcionAvion(Tablero *tablero, Juego *juego, Jugador *jugador){
+void funcionAvion(Tablero *tablero,Jugador *jugador){
 		Posicion posicion;
 		Casillero *aux;
 		std::cout<<"Le toca posicionar un avion"<<std::endl;
@@ -73,7 +73,7 @@ void funcionAvion(Tablero *tablero, Juego *juego, Jugador *jugador){
 		}
 }
 
-void funcionBarco(Tablero *tablero,Juego *juego, Jugador *jugador){
+void funcionBarco(Tablero *tablero, Jugador *jugador){
 		Posicion posicion;
 		Casillero *aux;
 		std::cout<<"Le toca posicionar un barco"<<std::endl;
@@ -82,10 +82,10 @@ void funcionBarco(Tablero *tablero,Juego *juego, Jugador *jugador){
 		aux->definirEjercito(BARCO);
 		aux->definirEstado(OCUPADO);
 		aux->definirPropiedad(jugador);
-		funcionMisil(tablero,juego,jugador);
+		funcionMisil(tablero,jugador);
 }
 
-void funcionMisil(Tablero *tablero,Juego *juego, Jugador *jugador){
+void funcionMisil(Tablero *tablero, Jugador *jugador){
 	Posicion posicion,aux;
 	std::cout<<"Le toca posicionar un barco"<<std::endl;
 	posicion=jugador->pedirEntradaPosicion(tablero,"ingrese la posicion donde va a tirar el misil:");
@@ -103,7 +103,7 @@ void funcionMisil(Tablero *tablero,Juego *juego, Jugador *jugador){
 	}
 }
 
-void funcionBombaAtomica(Tablero *tablero, Juego *juego, Jugador *jugador){
+void funcionBombaNuclear(Tablero *tablero, Jugador *jugador){
 	std::cout<<"Tirando bomba atomica!!!"<<std::endl;
 	Posicion posicion;
 	Casillero *aux;

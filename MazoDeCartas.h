@@ -7,6 +7,9 @@
 #include "Cola.h"
 #include<cstdlib>
 
+
+class Carta;
+
 class MazoDeCartas
 {
 private:

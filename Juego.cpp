@@ -97,8 +97,10 @@ bool Juego::jugar(Tablero *tablero,std::vector<Jugador *> jugadores, MazoDeCarta
 
     //fase de jugar la carta
     std::cout <<"Momento de jugar su carta!(PARTE DE CARTA COMENTADA)"<<std::endl;
-    cartaObtenida->ejecutarFuncion(tablero, jugador);
+    cartaObtenida->ejecutarFuncion(tablero,jugador);
     Clear();
+
+    tablero->imprimirTablero();
 
     return this->chequearVictoria(jugadores);
 }

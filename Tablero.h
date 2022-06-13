@@ -59,10 +59,10 @@ class Tablero
     unsigned int obtenerDimension();
 
     Casillero *obtenerCasillero(Posicion posicion);
+    void imprimirTablero();
 
 
     //---------- Funcionalidad ----------
-    void imprimirTablero(Tablero *);
 };
 
 #endif
