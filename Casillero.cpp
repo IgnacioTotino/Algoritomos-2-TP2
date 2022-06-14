@@ -84,7 +84,7 @@ void Casillero::definirEjercito(TipoDeEjercito ejercito){
 
 //---------- Funcionalidad ----------
 bool Casillero::existeProximo(){
-    if(!this->proximoCasillero){
+    if(this->proximoCasillero){
         return true;
     }
     return false;
@@ -93,12 +93,14 @@ bool Casillero::existeProximo(){
 void Casillero::eliminarEjercito(){
     Jugador *jugadorAtacado = this->obtenerPropiedad();
     switch (this->obtenerEjercito()){
-        AVION:
-            jugadorAtacado->reducirAviones();
-        BARCO:
-            jugadorAtacado->reducirBarcos();
-        SOLDADO:
+        case SOLDADO:
             jugadorAtacado->reducirSoldados();
+        case AVION:
+            jugadorAtacado->reducirAviones();
+        case BARCO:
+            jugadorAtacado->reducirBarcos();
+        case NINGUNO:
+            ;
     }
     this->definirEstado(INHABILITADO);
     this->definirPropiedad(NULL);

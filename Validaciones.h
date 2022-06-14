@@ -4,6 +4,7 @@
 #define VAL_H_
 
 #include <iostream>
+#include <cstdlib>
 #include "Tablero.h"
 
 class Tablero;

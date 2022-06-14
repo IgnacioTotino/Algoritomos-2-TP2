@@ -4,17 +4,23 @@
 #define CARTA_H_
 
 #include <string>
+#include <vector>
+#include "Tablero.h"
+#include "Jugador.h"
+#include "Juego.h"
 
-enum CartaAJugar {
-	misil,
-	avion,
-	barco,
-	bombaNuclear,
-	eliminarMazoSiguienteJugador,
-	cartaAdefinir1
-};
+class Tablero;
+class Jugador;
+class Juego;
 
-
+typedef enum{
+	MISIL,
+	CARTAAVION,
+	CARTABARCO,
+	BOMBANUCLEAR,
+	REVIVIRSOLDADO,
+	INUTILIDAD,
+}CartaAJugar;
 
 class Carta
 {
@@ -22,7 +28,7 @@ class Carta
 private:
 	CartaAJugar tipoDeCarta;
 	std::string descripcionCarta;
-
+	void (*funcionCarta)(Tablero *, Jugador*);
 public:
 	
 	Carta(CartaAJugar tipoDeCarta);
@@ -43,9 +49,8 @@ public:
 	POST: Devuelve la descripccion de la carta
 	*/
 
-	void ejecutarFuncion();
+	void ejecutarFuncion(Tablero *,  Jugador *);
 
 };
-
 
 #endif

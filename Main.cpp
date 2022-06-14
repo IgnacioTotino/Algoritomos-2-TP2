@@ -23,6 +23,8 @@ int main()
 
     cout<<"---------!!! COMIENZA EL JUEGO !!!----------" <<endl<<endl;
 
+    MazoDeCartas *mazo = new MazoDeCartas(1,1,1,1,1,1);
+    
     //pedimos ingreso de la cantidad de jugadores N
     cout<<"Ingrese la cantidad de jugadores que participaran:";
     cin>>cantidadDeJugadores;
@@ -44,14 +46,35 @@ int main()
     Clear();
     cout<<endl<<"OK! creando las estructuras correspondientes"<<endl<<endl;
 
+    //creamos el juego
+    Juego *juego = new Juego(cantidadDeJugadores);
     //creamos y inicializamos los objetos correspondientes;
     tablero = new Tablero(filas,columnas,niveles);
     //usamos el tipo de dato vector para almacenar los punteros a los jugadores...
     //quiza es dificil de ver/entender pero tiene sentido sino se complica
+    //creamos estructura auxiliar para el puntero del jugador creado
+    Jugador *jugadorAux;
     for(size_t i=0; i < cantidadDeJugadores; i++){
-        jugadores.push_back(new Jugador(i,cantidadDeSoldados));
-    }
+        jugadorAux = new Jugador(i,cantidadDeSoldados);
+        jugadores.push_back(jugadorAux);
+        try{
+            juego->colocarSoldados(tablero,jugadorAux,cantidadDeSoldados);
+        }catch (...){
+            std::cout<<"error cargue nuevamente la posicion del soldado"<<std::endl;
+            juego->colocarSoldados(tablero,jugadorAux,cantidadDeSoldados);
+        }
+     }
     std::cout<<"Estructuras creadas! procedemos a jugar"<<std::endl;
+    tablero->imprimirTablero();
+    size_t contadorDeTurnos=0;
+
+    while(!juego->jugar(tablero,jugadores,mazo,jugadores[contadorDeTurnos])){
+        contadorDeTurnos++;
+        if(contadorDeTurnos == cantidadDeJugadores){
+            contadorDeTurnos = 0;
+        }
+    };
+
 }
 
 

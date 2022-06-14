@@ -7,6 +7,9 @@
 #include "Cola.h"
 #include<cstdlib>
 
+
+class Carta;
+
 class MazoDeCartas
 {
 private:
@@ -40,7 +43,7 @@ public:
 	POST: Devuelve 'true' si el Mazo est� vac�o. En caso contrario, devuelve 'false'.
 	*/
 
-	CartaAJugar generarNumero();
+	//CartaAJugar generarNumero();
 	/*
 	PRE:  ....
 	POST: Destruye el Mazo, liberando los recursos que ocupaba la estructura de datos.

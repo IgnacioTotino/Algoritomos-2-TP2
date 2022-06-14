@@ -4,6 +4,7 @@
 #define TABLERO_H_
 
 #include <iostream>
+#include "bitmap_image.hpp"
 #include "Casillero.h"
 #include "Validaciones.h"
 #include "bitmap_image.hpp"
@@ -59,10 +60,10 @@ class Tablero
     unsigned int obtenerDimension();
 
     Casillero *obtenerCasillero(Posicion posicion);
+    void imprimirTablero();
 
 
     //---------- Funcionalidad ----------
-    void imprimirTablero();
 };
 
 #endif
