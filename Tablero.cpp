@@ -93,7 +93,7 @@ Casillero *Tablero::obtenerCasillero(Posicion posicion){
             obtenido = obtenido->obtenerProximo();
         }
     }
-    for(int x=1; x<posicion.x; x++){
+    for(int x=1; x<=posicion.x; x++){
         obtenido=obtenido->obtenerProximo();
     }
     //nos falta iterar en las columnas
@@ -106,24 +106,31 @@ Casillero *Tablero::obtenerCasillero(Posicion posicion){
 
 void dibujarEjercito(bitmap_image &imagen, Casillero *casillero, int x0, int y0){
     image_drawer draw(imagen);
+    draw.pen_width(2);
 
     switch(casillero->obtenerEjercito()){
         case SOLDADO:
-            for(int r=0; r<10; r++){
+            for(int r=0; r<5; r++){
                 draw.circle(x0+25,y0+10,r);
             }
             draw.pen_width(2);
-            draw.line_segment(x0+25,y0+10,x0+25,y0+20);
-            draw.line_segment(x0+25,y0+20,x0+15,y0+40);
-            draw.line_segment(x0+25,y0+20,x0+35,y0+40);
+            draw.line_segment(x0+25,y0+10,x0+25,y0+30);
+            draw.line_segment(x0+25,y0+30,x0+15,y0+40);
+            draw.line_segment(x0+25,y0+30,x0+35,y0+40);
+            draw.horiztonal_line_segment(x0+20,x0+30,y0+25);
+            break;
         case AVION:
-            for(int x=30; x>0; x--){
-                draw.rectangle(x0+25-x,y0+10+x,x0+25+x,y0+10+x);
+            for(int x=10; x>0; x--){
+                draw.rectangle(x0+25-x,y0+20+x,x0+25+x,y0+20+x);
             }
+            draw.vertical_line_segment(y0+10,y0+40,x0+25);
+            break;
         case BARCO:
-            for(int x=30; x>0; x--){
-                draw.rectangle(x0+25-x,y0+50+x,x0+25+x,y0+50+x);
-            } 
+            for(int i=0; i<=50; i++){
+                draw.rectangle(x0+10,y0+35,x0+40-i,y0+50-i);
+            }
+            draw.vertical_line_segment(y0+35,y0+25,x0+25);
+            break;
         case NINGUNO:
             break;
     }
@@ -141,6 +148,7 @@ void imprimirCasillero(bitmap_image &imagen, Casillero *casillero, int x0, int y
                 for(int i=0; i<=50; i++){
                     draw.rectangle(x0,y0,x0+50-i,y0+50-i);
                 }
+                dibujarEjercito(imagen,casillero,x0,y0);
             }
             break;
 
@@ -157,6 +165,7 @@ void imprimirCasillero(bitmap_image &imagen, Casillero *casillero, int x0, int y
                 for(int r=0; r<20; r++){
                     draw.circle(x0+25,y0+25,r);
                 }
+                dibujarEjercito(imagen,casillero,x0,y0);
             }
             break;
 
@@ -165,10 +174,11 @@ void imprimirCasillero(bitmap_image &imagen, Casillero *casillero, int x0, int y
             if(casillero->obtenerEstado() == INHABILITADO){
                 draw.pen_color(color[0][0],color[0][1],color[0][2]);
             }else{
-                draw.pen_color(color[4][0],color[4][1],color[4][2]);
                 for(int i=0; i<=50; i++){
+                    draw.pen_color(color[4][0]-i,color[4][1]-i,color[4][2]-i);
                     draw.rectangle(x0,y0,x0+50-i,y0+50-i);
                 }
+                dibujarEjercito(imagen,casillero,x0,y0);
             }
             break;
     }
@@ -210,7 +220,7 @@ void Tablero::imprimirTablero(){
     int x0 = 0;
     int y0 = 0;
     
-    int color[5][3]={{255,0,0},{96,60,20},{0,90,0},{0,0,255},{10,10,10}};
+    int color[5][3]={{255,0,0},{96,60,20},{0,90,0},{0,0,255},{203,203,203}};
     int negro[3] = {0,0,0};
     for(int z=1; z<=niveles; z++){
         imprimirEspacio(image,50*columnas,y0,negro);
