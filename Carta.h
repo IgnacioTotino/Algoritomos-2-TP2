@@ -53,6 +53,8 @@ public:
 
 };
 
+CartaAJugar generarCartaAleatoria();
+
 void funcionAvion(Tablero *, Jugador *);
 void funcionBarco(Tablero *, Jugador *);
 void funcionMisil(Tablero *, Jugador *);

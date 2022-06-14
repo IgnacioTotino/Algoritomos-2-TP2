@@ -24,7 +24,6 @@ int main()
     cout<<"---------!!! COMIENZA EL JUEGO !!!----------" <<endl<<endl;
 
     MazoDeCartas *mazo = new MazoDeCartas(1,1,1,1,1,1);
-    Carta *carta = mazo->repartirCarta();
     
     //pedimos ingreso de la cantidad de jugadores N
     cout<<"Ingrese la cantidad de jugadores que participaran:";
@@ -55,7 +54,6 @@ int main()
     //quiza es dificil de ver/entender pero tiene sentido sino se complica
     //creamos estructura auxiliar para el puntero del jugador creado
     Jugador *jugadorAux;
-    carta->ejecutarFuncion(tablero, jugadorAux);
     for(size_t i=0; i < cantidadDeJugadores; i++){
         jugadorAux = new Jugador(i,cantidadDeSoldados);
         jugadores.push_back(jugadorAux);
@@ -67,7 +65,7 @@ int main()
         }
      }
     std::cout<<"Estructuras creadas! procedemos a jugar"<<std::endl;
-
+    tablero->imprimirTablero();
     size_t contadorDeTurnos=0;
 
     while(!juego->jugar(tablero,jugadores,mazo,jugadores[contadorDeTurnos])){

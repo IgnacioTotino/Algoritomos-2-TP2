@@ -57,6 +57,82 @@ std::string Carta::getDescripcionCarta() {
 void Carta::ejecutarFuncion(Tablero *tablero, Jugador *jugador){
 	this->funcionCarta(tablero,jugador);
 }
+
+CartaAJugar generarCartaAleatoria(){
+		int numeroAleatorio = rand() % 6;
+	int porcentaje = rand() % 101;   //completar con el tema del segundo sorteo o calcular porcentaje.
+
+	CartaAJugar tipoDeCarta;
+
+	switch (numeroAleatorio)
+	{
+	case 0:
+		if (porcentaje) {
+			cout << "Te toco la carta tipo Misil" << endl;
+			tipoDeCarta = MISIL;
+		}
+		else {
+			cout << "No te toco una carta este turno" << endl;
+		}
+		break;
+
+	case 1:
+		if (porcentaje) {
+			cout << "Te toco la carta tipo Avion" << endl;
+			tipoDeCarta = CARTAAVION;
+		}
+		else {
+			cout << "No te toco una carta este turno" << endl;
+		}
+		break;
+
+	case 2:
+		if (porcentaje) {
+			cout << "Te toco la carta tipo Barco" << endl;
+			tipoDeCarta = CARTABARCO;
+		}
+		else {
+			cout << "No te toco una carta este turno" << endl;
+		}
+		break;
+
+	case 3:
+		if (porcentaje) {
+			cout << "Te toco la carta tipo Eliminar mazo del jugador contrario" << endl;
+			tipoDeCarta = INUTILIDAD;
+		}
+		else {
+			cout << "No te toco una carta este turno" << endl;
+		}
+		break;
+
+	case 4:
+		if (porcentaje) {
+			cout << "Te toco la carta tipo ..." << endl;
+			tipoDeCarta = REVIVIRSOLDADO;
+		}
+		else {
+			cout << "No te toco una carta este turno" << endl;
+		}
+		break;
+
+	case 5:
+		if(porcentaje < 98) {
+			cout << "Te toco la carta tipo Bomba Nuclear" << endl;
+			tipoDeCarta = BOMBANUCLEAR;
+		}
+		else {
+		cout << "No te toco una carta este turno" << endl;
+		}
+		break;
+
+	default:
+		cout << "ocurrio un error" << endl;
+		break;
+	}
+	return tipoDeCarta;
+}
+
 void funcionAvion(Tablero *tablero,Jugador *jugador){
 		Posicion posicion;
 		Casillero *aux;

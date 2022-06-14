@@ -13,7 +13,7 @@ MazoDeCartas::MazoDeCartas(int cantidadCartasMisil, int cantidadCartasAvion, int
 
 	while (cantidadCartas < cantidadTotalCartas)
 	{
-		CartaAJugar cartaAleatoria = this->generarNumero();
+		CartaAJugar cartaAleatoria = generarCartaAleatoria();
 
 		if (cartaAleatoria == MISIL) {
 			if (contadorMisil < cantidadCartasMisil) {
@@ -77,7 +77,7 @@ bool MazoDeCartas::elMazoEstaVacio() {
 	
 	return this->mazo->estaVacia();
 }
-
+/*
 CartaAJugar MazoDeCartas::generarNumero() {
 	
 	int numeroAleatorio = rand() % 6;
@@ -153,7 +153,7 @@ CartaAJugar MazoDeCartas::generarNumero() {
 	}
 	return tipoDeCarta;
 }
-
+*/
 MazoDeCartas::~MazoDeCartas() {
 	delete mazo;
 }
