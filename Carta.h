@@ -52,5 +52,13 @@ public:
 	void ejecutarFuncion(Tablero *,  Jugador *);
 
 };
+CartaAJugar generarCartaAleatoria();
+
+void funcionAvion(Tablero *, Jugador *);
+void funcionBarco(Tablero *, Jugador *);
+void funcionMisil(Tablero *, Jugador *);
+void funcionBombaNuclear(Tablero *, Jugador *);
+void funcionRevivir(Tablero *, Jugador *);
+void funcionEliminarTurno(Tablero *, Jugador *);
 
 #endif
