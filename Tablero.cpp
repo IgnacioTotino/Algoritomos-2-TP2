@@ -144,8 +144,8 @@ void imprimirCasillero(bitmap_image &imagen, Casillero *casillero, int x0, int y
             if(casillero->obtenerEstado() == INHABILITADO){
                 draw.pen_color(color[0][0],color[0][1],color[0][2]);
             }else{
-                draw.pen_color(color[1][0],color[1][1],color[1][2]);
                 for(int i=0; i<=50; i++){
+                draw.pen_color(color[1][0]+i,color[1][1]+i,color[1][2]+i);
                     draw.rectangle(x0,y0,x0+50-i,y0+50-i);
                 }
                 dibujarEjercito(imagen,casillero,x0,y0);
@@ -212,7 +212,7 @@ void Tablero::imprimirTablero(){
     int filas = this->obtenerCantidadFilas();
     int columnas = this->obtenerCantidadColumnas();
 
-    bitmap_image image(50*columnas,50*filas*niveles);
+    bitmap_image image(50*columnas,50*filas*niveles+(10)*niveles);
     image.set_all_channels(255,255,255);
 
     int pasoColumna = 50;
